@@ -11,17 +11,17 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $users = User::where('type',$request->type)->paginate(30);
-       
-        return view('dashboard.user.index',compact('users'));
+        $users = User::query()->where('type', $request->type)->paginate(30);
+
+        return view('dashboard.user.index', compact('users'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view('dashboard.user.create');
     }
@@ -29,23 +29,21 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        
-        $validated = $request->validate([
+        $request->validate([
             'mobile' => 'required|unique:users|max:11|min:11',
             'name' => 'required|min:2|max:191',
             'password' => 'required|min:3|max:191',
-            'commission' => 'required|integer',
-
+            'commission' => 'required|integer'
         ]);
-    
-      $request->merge(['password' => bcrypt($request->password)]);
 
-        User::create($request->all());
-        
-        session()->flash('msg', __('messages.store' , ['params' =>  __('input.design')]));
-        return redirect()->route('user.index',['type'=>'OPERATOR']);
+        $request->merge(['password' => bcrypt($request->password)]);
+
+        User::query()->create($request->all());
+
+        session()->flash('msg', __('messages.store', ['params' => __('input.design')]));
+        return redirect()->route('user.index', ['type' => 'OPERATOR']);
     }
 
     /**
@@ -59,36 +57,32 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $user): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        
-        return view('dashboard.user.edit' , compact('user'));
+        return view('dashboard.user.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): \Illuminate\Http\RedirectResponse
     {
-        
-        $user = User::find($id);
-        
-        $validated = $request->validate([
-        'mobile' => 'unique:users,mobile,'.$user->id,
-            'name' => 'required|min:2|max:191',
-            'commission' => 'required|integer',
+        $user = User::query()->find($id);
 
+        $request->validate([
+            'mobile' => 'unique:users,mobile,' . $user->id,
+            'name' => 'required|min:2|max:191',
+            'commission' => 'required|integer'
         ]);
-    
-        if(request()->has('password')){
-             $request->merge(['password' => bcrypt($request->password)]);
-    
+
+        if (request()->has('password')) {
+            $request->merge(['password' => bcrypt($request->password)]);
         }
+
         $user->update($request->all());
-        
-        session()->flash('msg', __('messages.update' , ['params' =>  __('input.design')]));
-        
-        return redirect()->route('user.index',['type'=>'OPERATOR']);
+
+        session()->flash('msg', __('messages.update', ['params' => __('input.design')]));
+        return redirect()->route('user.index', ['type' => 'OPERATOR']);
     }
 
     /**

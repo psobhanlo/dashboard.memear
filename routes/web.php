@@ -22,9 +22,7 @@ Auth::routes(['register' => false]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
-
-Route::group(['namespace'=>'Dashboard'], function() {
-     Route::resource('user','UserController');
-    //  Route::resource('user','InvoiceController');
+Route::group(['namespace' => 'Dashboard'], function () {
+    Route::resource('user', 'UserController');
+    Route::resource('invoice', 'InvoiceController');
 });

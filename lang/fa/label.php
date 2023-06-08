@@ -15,5 +15,7 @@ return [
 
 
     'home' => 'خانه',
+    'designers' => 'طراح ها',
+    'store' => 'ساخت :params جدید',
 
 ];

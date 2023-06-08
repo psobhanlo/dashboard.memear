@@ -1,6 +1,6 @@
 @extends('dashboard.master')
- 
- 
+
+
 @section('title',' طراح  ویرایش ')
 @section('content')
         <div class="row">
@@ -8,18 +8,18 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title"> ویرایش طراح    </h4>
- 
+
                   <form method="POST" action="{{ route('user.update',$user->id) }}" class="forms-sample" >
-                      
+
                      @csrf
                 {{ method_field('PUT') }}
 
                     <div class="form-group row">
                       <label for="desginer_name" class="col-sm-3 col-form-label">
-                          {{__('input.desginer_name')}}
+                          {{__('input.designer_name')}}
                       </label>
                       <div class="col-sm-9">
-                        <input name="name" value="{{$user->name }}" type="text" class="form-control" id="desginer_name" placeholder="{{__('input.desginer_name')}} {{__('input.placeholder')}}">
+                        <input name="name" value="{{$user->name }}" type="text" class="form-control" id="designer_name" placeholder="{{__('input.desginer_name')}} {{__('input.placeholder')}}">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -42,7 +42,7 @@
                     </div>
                           <input name="type" value="OPERATOR" type="hidden"   >
 
- 
+
                     <button type="submit" class="btn btn-primary me-2"> {{__('input.submit')}}</button>
                     <button class="btn btn-light"> {{__('input.cancel')}}</button>
                   </form>

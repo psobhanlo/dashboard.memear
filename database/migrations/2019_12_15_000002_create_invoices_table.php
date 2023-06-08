@@ -16,7 +16,7 @@ return new class extends Migration
 
 
             $table->string('description');
-            $table->enum('status', [ 'INPROGRESS','COMPLETE' ,'PEYMENT' ,'WITHDRAWAL'])->default('INPROGRESS');
+            $table->enum('status', [ 'PROGRESS','COMPLETE' ,'PAYMENT' ,'WITHDRAWAL'])->default('PROGRESS');
             $table->string('price');
             $table->string('discount')->default(0);
 
@@ -25,10 +25,10 @@ return new class extends Migration
 
             $table->unsignedBigInteger('designer_id');
             $table->foreign('designer_id')->references('id')->on('users');
-            
+
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('users');
-            
+
             $table->timestamps();
         });
     }
