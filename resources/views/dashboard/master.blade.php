@@ -15,6 +15,7 @@
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/dashboard/css/style.css">
+    <link rel="stylesheet" href="/dashboard/css/select2.min.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="/dashboard/images/favicon.png"/>
 </head>
@@ -285,10 +286,10 @@
             <footer class="footer">
                 <div class="d-sm-flex justify-content-center justify-content-sm-between">
                     <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a
-                            href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
-                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a
-                            href="https://www.bootstrapdash.com/"
-                            target="_blank"> Bootstrap dashboard  </a> templates</span>
+                            href="#" target="_blank"> psobhanlo </a>2023</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">  <a
+                            href="#"
+                            target="_blank"> psobhanlo  </a>  </span>
                 </div>
             </footer>
             <!-- partial -->
@@ -320,6 +321,8 @@
 <!-- End custom js for this page-->
 
 <script src="/dashboard/js/jquery.cookie.js" type="text/javascript"></script>
+<script src="/dashboard/js/select2.min.js" type="text/javascript"></script>
+@yield('script')
 </body>
 
 </html>

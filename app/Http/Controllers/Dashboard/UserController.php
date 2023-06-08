@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $users = User::query()->where('type', $request->type)->paginate(30);
+        $users = User::query()->where('type', $request->type)->orderBy('id','DESC')->paginate(30);
 
         return view('dashboard.user.index', compact('users'));
     }

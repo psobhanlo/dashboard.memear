@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -10,17 +12,20 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        //
+        $invoices = Invoice::query()->where('status', $request->type)->orderBy('id', 'DESC')->paginate(30);
+
+        return view('dashboard.invoice.index', compact('invoices'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        //
+        $designers = User::where('type', 'OPERATOR')->get();
+        return view('dashboard.invoice.create', compact('designers'));
     }
 
     /**

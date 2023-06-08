@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
 
-
-            $table->string('description');
+            $table->tinyText('description');
             $table->enum('status', [ 'PROGRESS','COMPLETE' ,'PAYMENT' ,'WITHDRAWAL'])->default('PROGRESS');
             $table->string('price');
             $table->string('discount')->default(0);
