@@ -1,17 +1,31 @@
 @extends('dashboard.master')
 @section('btn')
     <a class="btn btn-success"
-       href="{{route('user.create')}}">   {{__('label.store', ['params' => __('input.design')])}} </a>
+       href="{{route('user.create',['type' => request()->get('type')])}}">
+        @if(request()->get('type') =='USER')
+            {{__('label.store', ['params' => __('label.customers')])}}
+        @else
+            {{__('label.store', ['params' => __('label.designers')])}}
+        @endif
+    </a>
 @endsection
 
 
-@section('title','لیست کاربران  ')
+@section('title',  request()->get('type') =='USER'? ' مشتری ها':'  طراح ها')
 @section('content')
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"> لیست کاربران</h4>
+                    <h4 class="card-title">
+
+                        @if(request()->get('type') == 'USER')
+                            مشتری ها
+                        @else
+                            طراح ها
+                        @endif
+
+                    </h4>
 
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -26,15 +40,14 @@
                                 <th>
                                     {{__('input.mobile')}}
                                 </th>
-                                <th>
-                                    {{__('input.commission')}}
-                                </th>
-
+                                @if(request()->get('type') =='OPERATOR')
+                                    <th>
+                                        {{__('input.commission')}}
+                                    </th>
+                                @endif
                                 <th>
                                     {{__('input.created_at')}}
                                 </th>
-
-
                                 <th>
                                     {{__('input.edit')}}
                                 </th>
@@ -53,14 +66,16 @@
                                     <td>
                                         {{$user->mobile}}
                                     </td>
-                                    <td>
-                                        {{$user->commission}} %
-                                    </td>
+                                    @if(request()->get('type') =='OPERATOR')
+                                        <td>
+                                            {{$user->commission}} %
+                                        </td>
+                                    @endif
                                     <td>
                                         {{$user->created_at}}
                                     </td>
                                     <td>
-                                        <a href="{{route('user.edit',$user->id)}}">
+                                        <a href="{{route('user.edit',$user->id )}}">
                                             <i class="mdi mdi-pencil"></i>
                                         </a>
                                     </td>

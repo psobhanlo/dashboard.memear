@@ -19,10 +19,10 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-Route::group(['namespace' => 'Dashboard'], function () {
+Route::group(['namespace' => 'Dashboard', 'middleware' => 'isAdmin'], function () {
     Route::resource('user', 'UserController');
+    Route::resource('panel', 'PanelController');
     Route::resource('invoice', 'InvoiceController');
+    Route::get('search-customer', 'UserController@search');
 });

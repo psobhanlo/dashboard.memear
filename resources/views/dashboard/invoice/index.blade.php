@@ -20,19 +20,36 @@
                                     #
                                 </th>
                                 <th>
-                                    {{__('input.name')}}
+                                    {{__('input.customer')}}
                                 </th>
                                 <th>
                                     {{__('input.mobile')}}
                                 </th>
                                 <th>
-                                    {{__('input.commission')}}
+                                    {{__('input.price')}}
+                                </th>
+                                <th>
+                                    {{__('input.print')}}
+                                </th>
+                                <th>
+                                    {{__('input.final_price')}}
                                 </th>
 
                                 <th>
+                                    {{__('input.designer_id')}}
+                                </th>
+                                <th>
+                                    {{__('input.commission_designer')}}
+                                </th>
+                                <th>
+                                    {{__('input.designer_benefit')}}
+                                </th>
+                                <th>
+                                    {{__('input.status')}}
+                                </th>
+                                <th>
                                     {{__('input.created_at')}}
                                 </th>
-
 
                                 <th>
                                     {{__('input.edit')}}
@@ -47,13 +64,45 @@
                                     </td>
 
                                     <td>
-                                        {{$invoice->name}}
+                                        {{$invoice->customer->name}}
                                     </td>
                                     <td>
-                                        {{$invoice->mobile}}
+                                        {{$invoice->customer->mobile}}
                                     </td>
                                     <td>
-                                        {{$invoice->commission}} %
+                                        {{number_format($invoice->price)}} تومان
+                                    </td>
+                                    <td>
+                                        @if($invoice->print_count || $invoice->print_price)
+                                            {{$invoice->print_count}} عدد
+                                            | {{number_format($invoice->print_count * $invoice->print_price)}} تومان
+                                        @else
+                                            ندارم
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{number_format($invoice->price - ($invoice->print_count * $invoice->print_price) - $invoice->discount)}}
+                                        تومان
+                                    </td>
+                                    <td>
+                                        {{$invoice->designer->name}}
+                                    </td>
+                                    <td>
+                                        {{$invoice->designer->commission}} %
+                                    </td>
+                                    <td>
+                                        {{number_format((($invoice->price - ($invoice->print_count * $invoice->print_price) - $invoice->discount) * $invoice->designer->commission)/ 100)}}
+                                    </td>
+
+                                    <td>
+                                        <a href="#" class="btn
+                                        @if($invoice->status === "PROGRESS")
+                                      {{' btn-success  '}}
+                                    @endif
+
+                                        ">
+                                            {{__('input.'. $invoice->status)}}
+                                        </a>
                                     </td>
                                     <td>
                                         {{$invoice->created_at}}

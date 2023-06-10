@@ -45,7 +45,7 @@
 
                         <div class="form-group row">
                             <label for="print_price"
-                                   class="col-sm-3 col-form-label"> {{__('input.print_count')}}</label>
+                                   class="col-sm-3 col-form-label"> {{__('input.print_price')}}</label>
                             <div class="col-sm-9">
                                 <input name="print_price" value="{{ old('print_price') }}" class="form-control"
                                        id="print_price"
@@ -84,10 +84,7 @@
                             <div class="col-sm-9">
                                 <select name="customer_id" class="customer_id form-control form-control-lg"
                                         id="customer_id">
-                                    @foreach($designers as $designer)
-                                        <option value="{{$designer->id}}">{{$designer->name}} | کد
-                                            طراح {{$designer->id}}</option>
-                                    @endforeach
+
                                 </select>
                             </div>
                         </div>
@@ -109,22 +106,50 @@
     <script>
         $(document).ready(function () {
             $('.designer_id').select2({dir: "rtl"});
+            $('.customer_id').select2({dir: "rtl"});
 
-            $('.customer_id').select2({
-                dir: "rtl",
-                ajax: {
-                    url: '/user?type=USER',
-                    data: function (params) {
-                        var query = {
-                            search: params.term,
-                            type: 'public'
-                        }
 
-                        // Query parameters will be ?search=[term]&type=public
-                        return query;
-                    }
-                }
+            $(document).on('keyup', '.select2-search__field', function (e) {
+                $.ajax({
+                    url: "/search-customer?type=USER",
+                    data: {search: e.target.value}
+                }).done(function (data) {
+                    console.log(data)
+                    $('#customer_id').html('')
+                    $.map(data, function (val, i) {
+                        $('#customer_id').append('<option value="' + val.id + '">' + val.name + ' | ' + val.mobile + ' | شماره اشتراک' + val.id + '</option>')
+                    });
+                });
             });
+
+            // $('.customer_id').select2({
+            //     dir: "rtl",
+            //     ajax: {
+            //         delay: 250,
+            //         dataType: 'json',
+            //         url: '/search-customer?type=USER',
+            //         data: function (params) {
+            //             return {
+            //                 search: params.term,
+            //             };
+            //         },
+            //         processResults: function (data) {
+            //             var arr = []
+            //             console.log(data)
+            //             $.each(data, function (index, item) {
+            //                 arr.push({
+            //                     id: item.id,
+            //                     text: item.name + ' | اشتراک شماره ' + item.id + ' | همراه شماره ' + item.mobile,
+            //                 })
+            //             })
+            //
+            //             return {
+            //                 results: arr
+            //             };
+            //         }
+            //     },
+            //
+            // })
         });
     </script>
 @endsection

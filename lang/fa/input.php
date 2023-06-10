@@ -1,20 +1,30 @@
 <?php
 
 return [
+    'commission_designer' => ' کمیسیون طراح',
     'commission' => 'درصد دریافتی',
+    'designer_benefit' => 'درآمد طراح',
     'mobile' => 'شماره موبایل',
     'placeholder' => 'را وارد کنید',
     'submit' => 'تایید',
     'cancel' => 'لغو',
     'design' => 'طراح',
-    'name' => 'نام',
+    'name' => 'نام و نام خانوادگی',
+    'status' => 'وضعیت',
 
 
+    'designer_id' => 'طراح',
+    'customer_id' => 'مشتری',
+
+
+    'customer' => 'مشتری',
     'customer_name' => 'نام مشتری',
     'price' => 'قیمت',
     'discount' => 'تخفیف',
+    'print' => ' پرینت',
     'print_count' => 'تعداد پرینت',
-    'print_price' => 'قیمت پرینت',
+    'print_price' => 'قیمت هر پرینت',
+    'final_price' => 'مبلغ نهایی فاکتور',
     'description' => 'توضیحات',
 
 
@@ -33,5 +43,7 @@ return [
     'invoice_payment' => 'فاکتور های تسویه شده مشتری',
     'invoice_withdrawal' => 'فاکتور های تسویه با طراح',
 
+
+    'PROGRESS' => 'در حال انجام'
 
 ];

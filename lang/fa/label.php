@@ -16,6 +16,8 @@ return [
 
     'home' => 'خانه',
     'designers' => 'طراح ها',
+    'customers' => 'مشتری ها',
+    'logout' => 'خروج',
 
 
     'store' => 'ساخت :params جدید',

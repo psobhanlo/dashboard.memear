@@ -14,7 +14,10 @@ class InvoiceController extends Controller
      */
     public function index(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $invoices = Invoice::query()->where('status', $request->type)->orderBy('id', 'DESC')->paginate(30);
+        if($request->has('status'))
+            $invoices = Invoice::query()->with('designer','customer')->where('status', $request->status)->orderBy('id', 'DESC')->paginate(30);
+        else
+            $invoices = Invoice::query()->with('designer','customer')->orderBy('id', 'DESC')->paginate(30);
 
         return view('dashboard.invoice.index', compact('invoices'));
     }
@@ -33,7 +36,18 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'price' => 'required|integer',
+            'designer_id' => 'required',
+            'customer_id' => 'required',
+        ]);
+
+
+        Invoice::query()->create($request->all());
+
+        session()->flash('msg', __('messages.store', ['params' => __('input.invoice')]));
+        return redirect()->route('invoice.index');
     }
 
     /**
