@@ -34,8 +34,9 @@
                     فناوران
                     {{--                    <img src="/dashboard/images/logo.svg" alt="logo"/>--}}
                 </a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/dashboard/images/logo-mini.svg"
-                                                                               alt="logo"/></a>
+                <a class="navbar-brand brand-logo-mini" href="/panel">
+                    فناوران
+                </a>
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <span class="mdi mdi-sort-variant"></span>
                 </button>
@@ -43,7 +44,7 @@
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
             <ul class="navbar-nav mr-lg-4 w-100">
-                <li class="nav-item nav-search d-none d-lg-block w-100">
+                <li class="nav-item nav-search  d-block w-100">
                     @yield('btn')
                 </li>
             </ul>
