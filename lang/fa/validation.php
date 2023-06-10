@@ -128,7 +128,8 @@ return array(
         "available" => "موجود",
         "size" => "اندازه",
         "price" => "مبلغ فاکتور",
-        "designer_id" => "مبلغ فاکتور",
+        "designer_id" => "طراح",
+        "customer_id" => "مشتری",
         "commission" => "درصد کمیسیون"
 
     ),
