@@ -54,13 +54,7 @@
                         </div>
 
 
-                        <div class="form-group row">
-                            <label for="description" class="col-sm-3 col-form-label">{{__('input.description')}}</label>
-                            <div class="col-sm-9">
-                                <textarea name="description" class="form-control" id="description"
-                                          rows="4">{{ old('description') }}</textarea>
-                            </div>
-                        </div>
+
 
 
                         <div class="form-group row">
@@ -86,6 +80,14 @@
                                         id="customer_id">
 
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-3 col-form-label">{{__('input.description')}}</label>
+                            <div class="col-sm-9">
+                                <textarea name="description" class="form-control" id="description"
+                                          rows="4">{{ old('description') }}</textarea>
                             </div>
                         </div>
 

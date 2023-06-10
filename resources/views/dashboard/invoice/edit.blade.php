@@ -56,13 +56,7 @@
                         </div>
 
 
-                        <div class="form-group row">
-                            <label for="description" class="col-sm-3 col-form-label">{{__('input.description')}}</label>
-                            <div class="col-sm-9">
-                                <textarea name="description" class="form-control" id="description"
-                                          rows="4">{{$invoice->description }}</textarea>
-                            </div>
-                        </div>
+
 
 
                         <div class="form-group row">
@@ -113,7 +107,13 @@
                                 </select>
                             </div>
                         </div>
-
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-3 col-form-label">{{__('input.description')}}</label>
+                            <div class="col-sm-9">
+                                <textarea name="description" class="form-control" id="description"
+                                          rows="4">{{$invoice->description }}</textarea>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary me-2"> {{__('input.submit')}}</button>
                         <button class="btn btn-light"> {{__('input.cancel')}}</button>
                     </form>
