@@ -127,6 +127,8 @@ return array(
         "time" => "زمان",
         "available" => "موجود",
         "size" => "اندازه",
+        "price" => "مبلغ فاکتور",
+        "designer_id" => "مبلغ فاکتور",
         "commission" => "درصد کمیسیون"
 
     ),
