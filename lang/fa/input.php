@@ -44,6 +44,9 @@ return [
     'invoice_withdrawal' => 'فاکتور های تسویه با طراح',
 
 
-    'PROGRESS' => 'در حال انجام'
+    'PROGRESS' => 'در حال انجام',
+    'COMPLETE' => 'طراحی تمام شده',
+    'PAYMENT' => 'تسویه شده با مشتری',
+    'WITHDRAWAL' => 'تسویه شده با طراح'
 
 ];

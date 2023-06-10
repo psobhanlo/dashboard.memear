@@ -97,7 +97,13 @@
                                     <td>
                                         <a href="#" class="btn
                                         @if($invoice->status === "PROGRESS")
-                                      {{' btn-success  '}}
+                                          {{' btn-info  '}}
+                                      @elseif($invoice->status === "COMPLETE")
+                                          {{' btn-warning  '}}
+                                      @elseif($invoice->status === "PAYMENT")
+                                         {{' btn-success  '}}
+                                      @elseif($invoice->status === "WITHDRAWAL")
+                                         {{' btn-danger  '}}
                                     @endif
 
                                         ">

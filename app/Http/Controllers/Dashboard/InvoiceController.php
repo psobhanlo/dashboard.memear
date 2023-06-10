@@ -14,10 +14,10 @@ class InvoiceController extends Controller
      */
     public function index(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        if($request->has('status'))
-            $invoices = Invoice::query()->with('designer','customer')->where('status', $request->status)->orderBy('id', 'DESC')->paginate(30);
+        if ($request->has('status'))
+            $invoices = Invoice::query()->with('designer', 'customer')->where('status', $request->status)->orderBy('id', 'DESC')->paginate(30);
         else
-            $invoices = Invoice::query()->with('designer','customer')->orderBy('id', 'DESC')->paginate(30);
+            $invoices = Invoice::query()->with('designer', 'customer')->orderBy('id', 'DESC')->paginate(30);
 
         return view('dashboard.invoice.index', compact('invoices'));
     }
@@ -41,6 +41,7 @@ class InvoiceController extends Controller
             'price' => 'required|integer',
             'designer_id' => 'required',
             'customer_id' => 'required',
+            'status' => 'required',
         ]);
 
 
@@ -63,7 +64,10 @@ class InvoiceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $designers = User::where('type', 'OPERATOR')->get();
+        $invoice = Invoice::with('designer', 'customer')->find($id);
+
+        return view('dashboard.invoice.edit', compact('designers', 'invoice'));
     }
 
     /**
@@ -71,7 +75,20 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'price' => 'required|integer',
+            'designer_id' => 'required',
+            'customer_id' => 'required',
+            'status' => 'required',
+        ]);
+
+        $invoice = Invoice::with('designer', 'customer')->find($id);
+
+        $invoice->update($request->all());
+
+        session()->flash('msg', __('messages.update', ['params' => __('input.invoice')]));
+        return redirect()->route('invoice.index');
+
     }
 
     /**

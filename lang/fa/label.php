@@ -21,5 +21,6 @@ return [
 
 
     'store' => 'ساخت :params جدید',
+    'update' => ' ویرایش :params ',
 
 ];
