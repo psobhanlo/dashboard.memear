@@ -91,7 +91,6 @@
                             </div>
                         </div>
 
-                        <input name="status" value="PROGRESS" type="hidden">
 
 
                         <button type="submit" class="btn btn-primary me-2"> {{__('input.submit')}}</button>
