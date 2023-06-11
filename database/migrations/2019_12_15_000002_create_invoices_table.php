@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
 
-            $table->tinyText('description');
+            $table->tinyText('description')->nullable();
             $table->enum('status', [ 'PROGRESS','COMPLETE' ,'PAYMENT' ,'WITHDRAWAL'])->default('PROGRESS');
             $table->string('price');
-            $table->string('discount')->default(0);
+            $table->string('discount')->nullable();
 
-            $table->string('print_count')->default(0);
-            $table->string('print_price')->default(0);
+            $table->string('print_count')->nullable( );
+            $table->string('print_price')->nullable( );
 
             $table->unsignedBigInteger('designer_id');
             $table->foreign('designer_id')->references('id')->on('users');

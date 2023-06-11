@@ -77,7 +77,7 @@
                                             {{$invoice->print_count}} عدد
                                             | {{number_format($invoice->print_count * $invoice->print_price)}} تومان
                                         @else
-                                            ندارم
+                                            ندارد
                                         @endif
                                     </td>
                                     <td>
