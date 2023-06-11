@@ -41,8 +41,7 @@ class InvoiceController extends Controller
             'price' => 'required|integer',
             'designer_id' => 'required',
             'customer_id' => 'required',
-            'status' => 'required',
-        ]);
+         ]);
 
 
         Invoice::query()->create($request->all());
