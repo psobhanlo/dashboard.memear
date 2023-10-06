@@ -38,16 +38,20 @@ class InvoiceController extends Controller
     {
 
         $request->validate([
-            'price' => 'required|integer',
             'designer_id' => 'required',
             'customer_id' => 'required',
-         ]);
+        ]);
+
+        $data = $request->all();
+        $data['price'] = str_replace(',', '', $data['price']);
+        $data['discount'] = str_replace(',', '', $data['discount']);
+        $data['print_price'] = str_replace(',', '', $data['print_price']);
 
 
-        Invoice::query()->create($request->all());
+        Invoice::query()->create($data);
 
         session()->flash('msg', __('messages.store', ['params' => __('input.invoice')]));
-        return redirect()->route('invoice.index');
+        return redirect()->route('invoice.index', ['status' => 'PROGRESS']);
     }
 
     /**
@@ -87,7 +91,6 @@ class InvoiceController extends Controller
 
         session()->flash('msg', __('messages.update', ['params' => __('input.invoice')]));
         return redirect()->route('invoice.index');
-
     }
 
     /**
@@ -95,6 +98,29 @@ class InvoiceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+    }
+
+    public function searchPage(Request $request)
+    {
+        $invoice = null;
+        $designers = null;
+
+        if ($request->search) {
+            $designers = User::where('type', 'OPERATOR')->get();
+        }
+
+        return view('dashboard.invoice.search_box', compact('designers'));
+    }
+
+    public function search(Request $request)
+    {
+        $invoice = null;
+
+        if ($request->search) {
+            $invoice = Invoice::with('designer', 'customer')->find($request->search);
+        }
+
+        return response()->json($invoice);
     }
 }

@@ -22,7 +22,9 @@ Auth::routes(['register' => false]);
 
 Route::group(['namespace' => 'Dashboard', 'middleware' => 'isAdmin'], function () {
     Route::resource('user', 'UserController');
+    Route::get('search-customer', 'UserController@search');
     Route::resource('panel', 'PanelController');
     Route::resource('invoice', 'InvoiceController');
-    Route::get('search-customer', 'UserController@search');
+    Route::get('search-invoice-page', 'InvoiceController@searchPage')->name('invoice.search');
+    Route::get('search-invoice', 'InvoiceController@search');
 });

@@ -1,8 +1,5 @@
 @extends('dashboard.master')
-@section('btn')
-    <a class="btn btn-success"
-       href="{{route('invoice.create')}}">   {{__('label.store', ['params' => __('input.invoice')])}} </a>
-@endsection
+
 
 @section('title','لیست فاکتورها  ')
 @section('content')
@@ -52,7 +49,7 @@
                                 </th>
 
                                 <th>
-                                    {{__('input.edit')}}
+                                    باطل کردن
                                 </th>
                             </tr>
                             </thead>
@@ -70,10 +67,13 @@
                                         {{$invoice->customer->mobile}}
                                     </td>
                                     <td>
-                                        {{number_format($invoice->price)}} تومان
+                                        @if($invoice->price)
+                                            {{number_format($invoice->price)}} تومان
+                                        @endif
                                     </td>
                                     <td>
-                                        @if($invoice->print_count || $invoice->print_price)
+
+                                        @if($invoice->print_count && $invoice->print_price)
                                             {{$invoice->print_count}} عدد
                                             | {{number_format($invoice->print_count * $invoice->print_price)}} تومان
                                         @else
@@ -81,8 +81,10 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{number_format($invoice->price - ($invoice->print_count * $invoice->print_price) - $invoice->discount)}}
-                                        تومان
+                                        @if($invoice->price && $invoice->print_count && $invoice->print_price && $invoice->discount)
+                                            {{number_format($invoice->price - ($invoice->print_count * $invoice->print_price) - $invoice->discount)}}
+                                            تومان
+                                        @endif
                                     </td>
                                     <td>
                                         {{$invoice->designer->name}}
@@ -91,31 +93,33 @@
                                         {{$invoice->designer->commission}} %
                                     </td>
                                     <td>
+                                        @if($invoice->price && $invoice->print_count && $invoice->print_price && $invoice->discount)
+
                                         {{number_format((($invoice->price - ($invoice->print_count * $invoice->print_price) - $invoice->discount) * $invoice->designer->commission)/ 100)}}
+                                        @endif
+
                                     </td>
 
                                     <td>
                                         <a href="#" class="btn
                                         @if($invoice->status === "PROGRESS")
-                                          {{' btn-info  '}}
+                                          {{' btn-success  '}}
                                       @elseif($invoice->status === "COMPLETE")
-                                          {{' btn-warning  '}}
+                                          {{' btn-warning '}}
                                       @elseif($invoice->status === "PAYMENT")
-                                         {{' btn-success  '}}
+                                         {{' btn-info '}}
                                       @elseif($invoice->status === "WITHDRAWAL")
-                                         {{' btn-danger  '}}
-                                    @endif
-
-                                        ">
+                                         {{' btn-danger '}}
+                                    @endif">
                                             {{__('input.'. $invoice->status)}}
                                         </a>
                                     </td>
                                     <td>
-                                        {{$invoice->created_at}}
+                                        {{\Morilog\Jalali\CalendarUtils::strftime('H:i:s Y-m-d ', strtotime($invoice->created_at))}}
                                     </td>
                                     <td>
-                                        <a href="{{route('invoice.edit',$invoice->id)}}">
-                                            <i class="mdi mdi-pencil"></i>
+                                        <a href="">
+                                            <i class="h2 text-danger mdi mdi-delete-circle-outline"></i>
                                         </a>
                                     </td>
                                 </tr>

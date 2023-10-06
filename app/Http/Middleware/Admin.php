@@ -20,6 +20,6 @@ class Admin
         if (auth()->check() && auth()->user()->isAdmin() === 'ADMIN') {
             return $next($request);
         }
-        return response()->redirectToRoute('login')->withErrors('لطفا لاین کنید');
+        return response()->abort(401);
     }
 }

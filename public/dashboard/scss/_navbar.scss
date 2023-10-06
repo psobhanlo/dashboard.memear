@@ -1,6 +1,6 @@
 /* Navbar */
 .nav {
-    padding-right: 0 !importan;
+    padding-right: 0  ;
     padding-left: initial !important;
 }
 .navbar {
@@ -75,7 +75,7 @@
           margin: auto;
         }
       }
-    }  
+    }
   }
 
   .navbar-menu-wrapper {
@@ -197,18 +197,18 @@
             &::after {
               color: #4a4a4a;
             }
-          }  
+          }
         }
         &.dropdown {
           .dropdown-menu {
-            @extend .dropdownAnimation;        
+            @extend .dropdownAnimation;
             border: none;
             -webkit-box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
             -moz-box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
             box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
           }
           .navbar-dropdown {
-            position: absolute;            
+            position: absolute;
             font-size: 0.9rem;
             margin-top: 0;
             right: 0;
@@ -240,7 +240,7 @@
                   @extend .justify-content-center;
                   color: $white;
                   i {
-                    font-size: 17px;                    
+                    font-size: 17px;
                   }
                 }
               }

@@ -10829,8 +10829,7 @@ progress {
 }
 
 .col-form-label {
-    padding-top: calc(0.875rem + 1px);
-    padding-bottom: calc(0.875rem + 1px);
+
     margin-bottom: 0;
     font-size: inherit;
     line-height: 1;
@@ -22880,9 +22879,11 @@ select.form-control.border-dark, .dataTables_wrapper select.border-dark {
 select.form-control.border-dark:focus, .dataTables_wrapper select.border-dark:focus {
     outline: 1px solid #282f3a;
 }
-
+span#select2-designer_id-container {
+    font-size: 13px !important;
+}
 .form-group label {
-    font-size: 0.875rem;
+    font-size: 13px;
     line-height: 1.4rem;
     vertical-align: top;
     margin-bottom: .5rem;
@@ -23302,7 +23303,7 @@ dl li {
     border-top: 0;
     border-bottom-width: 1px;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 14px;
     line-height: 27px
 }
 
@@ -23571,7 +23572,7 @@ dl li {
 
 .main-panel {
     transition: width 0.25s ease, margin 0.25s ease;
-    width: calc(100% - 257px);
+    width: 100%;
     min-height: calc(100vh - 60px);
     display: -webkit-flex;
     display: flex;
