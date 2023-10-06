@@ -49,7 +49,7 @@
                                 </th>
 
                                 <th>
-                                    باطل کردن
+                                    ارشیو کردن
                                 </th>
                             </tr>
                             </thead>
@@ -95,22 +95,25 @@
                                     <td>
                                         @if($invoice->price && $invoice->print_count && $invoice->print_price && $invoice->discount)
 
-                                        {{number_format((($invoice->price - ($invoice->print_count * $invoice->print_price) - $invoice->discount) * $invoice->designer->commission)/ 100)}}
+                                            {{number_format((($invoice->price - ($invoice->print_count * $invoice->print_price) - $invoice->discount) * $invoice->designer->commission)/ 100)}}
                                         @endif
 
                                     </td>
 
                                     <td>
-                                        <a href="#" class="btn
-                                        @if($invoice->status === "PROGRESS")
-                                          {{' btn-success  '}}
-                                      @elseif($invoice->status === "COMPLETE")
-                                          {{' btn-warning '}}
-                                      @elseif($invoice->status === "PAYMENT")
-                                         {{' btn-info '}}
-                                      @elseif($invoice->status === "WITHDRAWAL")
-                                         {{' btn-danger '}}
-                                    @endif">
+                                        <a href="#" class="btn text-white
+                                           @if($invoice->status === "PROGRESS")
+                                            {{' btn-success  '}}
+                                          @elseif($invoice->status === "COMPLETE")
+                                              {{' btn-warning '}}
+                                          @elseif($invoice->status === "PAYMENT")
+                                             {{' btn-info '}}
+                                          @elseif($invoice->status === "WITHDRAWAL")
+                                             {{' btn-danger '}}
+                                              @elseif($invoice->status === "TRASH")
+                                             {{' btn-danger '}}
+                                          @endif
+                                    ">
                                             {{__('input.'. $invoice->status)}}
                                         </a>
                                     </td>
@@ -118,9 +121,16 @@
                                         {{\Morilog\Jalali\CalendarUtils::strftime('H:i:s Y-m-d ', strtotime($invoice->created_at))}}
                                     </td>
                                     <td>
-                                        <a href="">
-                                            <i class="h2 text-danger mdi mdi-delete-circle-outline"></i>
-                                        </a>
+                                        <form method="post" action="{{route('updateStep')}}">
+                                            @csrf
+                                            @method('post')
+                                            <input type="hidden" name="id" value={{$invoice->id}}/>
+                                            <input type="hidden" name="status" value={{$invoice->status}}/>
+
+                                            <button class="border-0 bg-transparent" type="submit" href="">
+                                                <i class="h2 text-danger mdi mdi-delete-circle-outline"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

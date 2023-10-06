@@ -22887,6 +22887,7 @@ span#select2-designer_id-container {
     line-height: 1.4rem;
     vertical-align: top;
     margin-bottom: .5rem;
+    margin-top: .5rem;
 }
 
 .form-group.has-danger .form-control, .form-group.has-danger .dataTables_wrapper select, .dataTables_wrapper .form-group.has-danger select {

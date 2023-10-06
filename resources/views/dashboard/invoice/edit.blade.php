@@ -114,7 +114,7 @@
                                           rows="4">{{$invoice->description }}</textarea>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary me-2"> {{__('input.submit')}}</button>
+                        <button type="submit" class="btn btn-info me-2"> {{__('input.submit')}}</button>
                         <button class="btn btn-light"> {{__('input.cancel')}}</button>
                     </form>
                 </div>

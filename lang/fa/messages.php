@@ -12,8 +12,9 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    
+
     'store'=>'ثبت :params با موفقیت انجام شد. ',
     'update'=>'ویرایش :params با موفقیت انجام شد. ',
+    'delete'=>'ارشیو :params با موفقیت انجام شد. ',
 
 ];

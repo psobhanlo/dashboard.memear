@@ -103,12 +103,8 @@ class InvoiceController extends Controller
 
     public function searchPage(Request $request)
     {
-        $invoice = null;
-        $designers = null;
+        $designers = User::where('type', 'OPERATOR')->get();
 
-        if ($request->search) {
-            $designers = User::where('type', 'OPERATOR')->get();
-        }
 
         return view('dashboard.invoice.search_box', compact('designers'));
     }
@@ -118,9 +114,21 @@ class InvoiceController extends Controller
         $invoice = null;
 
         if ($request->search) {
-            $invoice = Invoice::with('designer', 'customer')->find($request->search);
+            $invoice = Invoice::with('designer', 'customer')->find($request->search)->where('status', 'PROGRESS');
         }
 
         return response()->json($invoice);
+    }
+
+    public function updateStep(Request $request)
+    {
+        $invoice = Invoice::find($request->id);
+        $invoice->status = $request->status;
+
+
+        session()->flash('msg', __('messages.delete', ['params' => __('input.invoice')]));
+
+        return redirect()->back();
+
     }
 }
